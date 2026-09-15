@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#059669" />
+  <meta name="description" content="RythuSeva - Smart Farmer Procurement, Real-Time Queue Management, Net Profit Mandi Calculator, All India Market Yards, Multi-lingual Voice AI, Biometrics & Security Password." />
+  <title>రైతుసేవ | RythuSeva - All India Farmer Procurement & Mandi Intelligence</title>
+  
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    window.FARMDIRECT_API_BASE = window.location.origin;
+  </script>
+</head>
+<body>
+
+  <!-- Top 24x7 Government Toll-Free Helpline Strip -->
+  <div class="toll-free-top-strip">
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+      <span>📞 <strong>24x7 Kisan Toll-Free Helpline:</strong></span>
+      <a href="tel:18001801551" class="toll-free-link" title="Click to call National Kisan Call Centre">
+        📞 1800-180-1551 (All India)
+      </a>
+      <a href="tel:18002700224" class="toll-free-link" title="e-NAM National Mandi Support">
+        🏛️ e-NAM: 1800-270-0224
+      </a>
+      <a href="tel:155251" class="toll-free-link" title="State Rythu Helpline">
+        🌾 State Rythu: 155251
+      </a>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+      <div id="backendStatusPill" class="backend-status-pill" title="FastAPI Production Backend Status">
+        <span class="status-pulse-dot online"></span>
+        <span id="backendStatusLabel">🟢 Backend: Online (v2.0)</span>
+      </div>
+      <div style="font-size:0.75rem; color:#d1fae5;">
+        ✓ All Indian States & Districts Covered
+      </div>
+    </div>
+  </div>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo-badge">🌾</div>
+        <div class="brand-text">
+          <h1 data-i18n="appTitle">రైతుసేవ</h1>
+          <p data-i18n="appSubtitle">స్మార్ట్ ప్రభుత్వ కొనుగోలు, క్యూ నిర్వహణ & మార్కెట్ సమాచారం</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Desktop Header Navigation Bar -->
+        <nav class="desktop-nav">
+          <button type="button" class="desktop-nav-btn active" data-nav-tab="home">🏠 <span data-i18n="navHome">హోమ్</span></button>
+          <button type="button" class="desktop-nav-btn" data-nav-tab="book">📅 <span data-i18n="navBookSlot">స్లాట్ బుకింగ్</span></button>
+          <button type="button" class="desktop-nav-btn" data-nav-tab="queue">🚦 <span data-i18n="navQueue">లైవ్ క్యూ</span></button>
+          <button type="button" class="desktop-nav-btn" data-nav-tab="markets">📊 <span data-i18n="navMarkets">మార్కెట్లు & లాభం</span></button>
+          <button type="button" class="desktop-nav-btn" data-nav-tab="voice">🎙️ <span data-i18n="navVoice">వాయిస్ AI & Q&A</span></button>
+          <button type="button" class="desktop-nav-btn" data-nav-tab="track">🔎 <span data-i18n="navTrack">స్టేటస్</span></button>
+        </nav>
+
+        <!-- Language Switcher -->
+        <div class="lang-select-wrap">
+          <span>🌐</span>
+          <select id="langSelect" aria-label="Language">
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="en">English</option>
+            <option value="hi">हिंदी (Hindi)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Biometric & User-Fixed Security Password Authentication Banner -->
+  <div class="user-banner-container">
+    <div id="userProfileBanner">
+      <div class="auth-buttons-group">
+        <button class="btn-fast-bio btn-biometric-trigger">
+          <span class="fingerprint-icon">👆</span>
+          <span data-i18n="biometricLoginBtn">వేలిముద్ర లాగిన్ (బయోమెట్రిక్)</span>
+        </button>
+        <button class="btn-fast-pass btn-password-login-trigger">
+          <span>🔑</span>
+          <span data-i18n="passwordLoginBtn">సెక్యూరిటీ పాస్‌వర్డ్ లాగిన్</span>
+        </button>
+        <button class="btn-fix-pill btn-fix-password-trigger">
+          <span>⚙️</span>
+          <span data-i18n="fixPasswordBtn">పాస్‌వర్డ్ సెట్ / మార్చుకోండి</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Viewport -->
+  <main class="main-viewport">
+
+    <!-- =========================================================================
+         TAB 1: HOME & DASHBOARD
+         ========================================================================= -->
+    <section id="tab-home" class="tab-section active">
+      <!-- Hero Stat Cards -->
+      <div class="hero-stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrap green">🏛️</div>
+          <div class="stat-info">
+            <h3>120+</h3>
+            <p data-i18n="statActiveCentres">ప్రభుత్వ మార్కెట్ యార్డులు</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap amber">⏱️</div>
+          <div class="stat-info">
+            <h3>18 <span style="font-size:0.9rem;" data-i18n="statMins">నిమిషాలు</span></h3>
+            <p data-i18n="statAvgWait">సగటు వేచి ఉండే సమయం</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap blue">💰</div>
+          <div class="stat-info">
+            <h3>₹1,420 <span style="font-size:0.9rem;" data-i18n="statCrores">కోట్లు</span></h3>
+            <p data-i18n="statMspDisbursed">రైతుల ఖాతాల్లో జమైన DBT మొత్తం</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple">🎫</div>
+          <div class="stat-info">
+            <h3>1,842</h3>
+            <p data-i18n="statActiveTokens">క్యూలో ఉన్న టోకెన్లు</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Banners -->
+      <div class="quick-action-row">
+        <div class="quick-action-card" onclick="app.switchTab('book')">
+          <h3 data-i18n="bookSlotTitle">రైతు నమోదు & మార్కెట్ స్లాట్ బుకింగ్</h3>
+          <p data-i18n="bookSlotSubtitle">మీరు మార్కెట్ యార్డుకు వచ్చే సమయాన్ని ముందుగా రిజర్వ్ చేసుకోండి. వాహనాల రద్దీని నివారించి తక్షణ QR టోకెన్ పాస్ పొందండి.</p>
+          <button class="btn-card-action">⚡ Book Slot Now →</button>
+        </div>
+        <div class="quick-action-card amber-glow" onclick="app.switchTab('markets')">
+          <h3 data-i18n="calcTitle">ఉత్తమ మార్కెట్ సిఫార్సు & నికర లాభ కాలిక్యులేటర్</h3>
+          <p data-i18n="calcSubtitle">సూత్రం: నికర అమ్మకం లాభం = పంట ధర - రవాణా ఖర్చు - ఇతర మార్కెట్ ఛార్జీలు</p>
+          <button class="btn-card-action">📊 Calculate Best Mandi →</button>
+        </div>
+      </div>
+
+      <!-- Real-Time Queue Preview -->
+      <div class="queue-live-hero">
+        <div class="serving-token-display">
+          <span class="badge-live">● LIVE YARD CALL</span>
+          <p style="font-size:0.85rem; color:#a7f3d0;" data-i18n="nowServing">ప్రస్తుతం పిలుస్తున్న టోకెన్</p>
+          <div class="token-huge" id="homeServingToken">AP-GNT-2026-0839</div>
+          <p style="font-size:0.8rem; color:#e2e8f0; margin-top:4px;">Guntur Mirchi Yard • Gate 2 Weighbridge</p>
+          <button class="btn btn-outline btn-sm" style="margin-top:12px; color:#fff; border-color:rgba(255,255,255,0.4);" onclick="app.switchTab('queue')">
+            View Live Queue Board →
+          </button>
+        </div>
+
+        <div class="bays-grid">
+          <div class="bay-item">
+            <div class="bay-name" data-i18n="bayWeighbridge">ఎలక్ట్రానిక్ కాటా / తూకం</div>
+            <div class="bay-status">Bays 1 & 2: Active</div>
+            <span style="font-size:0.75rem; color:#a7f3d0;">Avg: 4 mins / truck</span>
+          </div>
+          <div class="bay-item">
+            <div class="bay-name" data-i18n="bayQuality">నాణ్యత & తేమ పరీక్ష</div>
+            <div class="bay-status">Bay 3: Moisture Check</div>
+            <span style="font-size:0.75rem; color:#a7f3d0;">Paddy, Cotton & Chilli QA</span>
+          </div>
+          <div class="bay-item">
+            <div class="bay-name" data-i18n="bayUnload">అన్‌లోడింగ్ షెడ్లు & గోదాములు</div>
+            <div class="bay-status">Sheds A, B, C: Ready</div>
+            <span style="font-size:0.75rem; color:#a7f3d0;">Hamali Crew On-Duty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           PROMINENT FEATURE: FARMDIRECT VOICE ASSISTANT (🌾 Talk to FarmDirect)
+           ===================================================================== -->
+      <div class="homepage-voice-hero-card" id="homeVoiceHeroCard">
+        <div class="voice-hero-top">
+          <div class="voice-title-group">
+            <span class="voice-hero-tag">🎙️ Real-time Multilingual Voice AI</span>
+            <h2 class="voice-hero-title">🌾 <span data-i18n="talkToFarmDirectTitle">Talk to FarmDirect</span></h2>
+            <p class="voice-hero-desc" data-i18n="talkToFarmDirectDesc">
+              Ask about crop prices, markets and selling options in your language.
+            </p>
+          </div>
+
+          <!-- Language Selector: [తెలుగు] [हिन्दी] [English] -->
+          <div class="voice-lang-pills-bar">
+            <span class="lang-pills-label">Language / భాష:</span>
+            <div class="voice-lang-pills" role="radiogroup" aria-label="Voice Language">
+              <button type="button" class="voice-lang-pill active" data-voice-lang="te" id="homeLangPillTe">
+                <span class="pill-dot"></span> తెలుగు
+              </button>
+              <button type="button" class="voice-lang-pill" data-voice-lang="hi" id="homeLangPillHi">
+                <span class="pill-dot"></span> हिन्दी
+              </button>
+              <button type="button" class="voice-lang-pill" data-voice-lang="en" id="homeLangPillEn">
+                <span class="pill-dot"></span> English
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Voice Interaction Zone: Big Button, Listening Animation & Status -->
+        <div class="voice-main-interaction-zone">
+          <div class="mic-button-wrapper">
+            <button type="button" id="homeVoiceMicBtn" class="big-farmer-mic-btn" aria-label="Tap to speak in selected language">
+              <span class="mic-icon" id="homeMicIcon">🎙️</span>
+              <span class="mic-label" id="homeMicLabel">Tap to Speak</span>
+            </button>
+
+            <!-- Animated Sound Waveform (Visible when listening) -->
+            <div id="homeVoiceWaveform" class="voice-listening-waveform" style="display:none;" aria-hidden="true">
+              <span class="voice-wave-bar"></span>
+              <span class="voice-wave-bar"></span>
+              <span class="voice-wave-bar"></span>
+              <span class="voice-wave-bar"></span>
+              <span class="voice-wave-bar"></span>
+              <span class="voice-wave-bar"></span>
+            </div>
+          </div>
+
+          <!-- Status indicator & Stop Button -->
+          <div class="voice-status-bar">
+            <div id="homeVoiceStatusText" class="voice-status-badge">
+              🎙️ మాట్లాడటానికి మైక్ తాకండి (Tap to speak)
+            </div>
+            <button type="button" id="homeVoiceStopBtn" class="btn-voice-stop-record" style="display:none;">
+              ⏹ Stop
+            </button>
+          </div>
+
+          <!-- Real-Time Speech Recognition Transcript Box -->
+          <div id="homeTranscriptWrap" class="voice-transcript-banner" style="display:none;">
+            <div class="transcript-header">
+              <span>🗣️ Recognized Speech / మీరు మాట్లాడిన మాటలు:</span>
+            </div>
+            <div id="homeTranscriptText" class="transcript-content"></div>
+          </div>
+
+          <!-- AI Response Card with Spoken Audio Replay Controls -->
+          <div id="homeVoiceResponseBox" class="voice-response-display-card" style="display:none;">
+            <div class="response-display-header">
+              <span class="response-badge-green">🌾 రైతు వాణి సమాధానం (FarmDirect Response)</span>
+              <div class="audio-action-buttons">
+                <button type="button" id="homeVoiceReplayBtn" class="btn-audio-pill" title="Replay spoken answer">
+                  🔊 Replay
+                </button>
+                <button type="button" id="homeVoiceStopAudioBtn" class="btn-audio-pill stop" title="Stop audio playback">
+                  ⏹ Stop
+                </button>
+              </div>
+            </div>
+
+            <!-- Key Metric Comparison: Selling Price vs Estimated Net Amount -->
+            <div id="homeMetricBadges" class="voice-metric-pills-row" style="display:none;">
+              <div class="metric-card selling-price-card">
+                <span class="metric-title">మార్కెట్ మోడల్ ధర (Selling Price)</span>
+                <span class="metric-value" id="homeSellingPriceVal">₹0 / క్వింటల్</span>
+              </div>
+              <div class="metric-card net-amount-card">
+                <span class="metric-title">అంచనా నికర లాభం (Estimated Net Amount)</span>
+                <span class="metric-value" id="homeNetAmountVal">₹0</span>
+              </div>
+            </div>
+
+            <div id="homeVoiceAnswerText" class="voice-answer-markdown"></div>
+          </div>
+
+          <!-- Graceful Error / Retry Card (Hidden unless error occurs) -->
+          <div id="homeVoiceErrorBox" class="voice-error-card" style="display:none;">
+            <div class="error-msg-text" id="homeVoiceErrorText"></div>
+            <button type="button" id="homeVoiceRetryBtn" class="btn-voice-retry">
+              🔄 మళ్ళీ మాట్లాడండి (Retry)
+            </button>
+          </div>
+
+          <!-- Fallback Text Box: "You can also type your question" -->
+          <div class="voice-fallback-container">
+            <label for="homeVoiceTextInput" class="fallback-label">
+              ⌨️ <span data-i18n="voiceFallbackLabel">You can also type your question:</span>
+            </label>
+            <div class="fallback-input-row">
+              <input type="text" id="homeVoiceTextInput" class="form-control" placeholder="ఉదా: నా వరి పంటను ఎక్కడ అమ్మితే మంచి ధర వస్తుంది? (లేదా టైప్ చేయండి)..." />
+              <button type="button" id="homeBtnSendVoiceText" class="btn btn-primary">
+                🚀 <span data-i18n="btnSend">అడగండి</span>
+              </button>
+            </div>
+            <div class="fallback-hint">
+              💡 Formula: <strong>Estimated Net Amount = Quantity × Selling Price − Transport − Charges</strong>
+            </div>
+          </div>
+
+          <!-- Multilingual Sample Voice Query Chips -->
+          <div class="voice-sample-chips-wrap">
+            <div class="chips-title" data-i18n="suggestedQuestionsLabel">🌾 Try asking in your language (Tap to test):</div>
+            <div class="chips-horizontal-list" id="homeVoiceSampleChips">
+              <!-- Dynamically rendered based on active language -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         TAB 2: BOOK SLOT & FARMER REGISTRATION
+         ========================================================================= -->
+    <section id="tab-book" class="tab-section">
+      <div class="section-header-box">
+        <h2 data-i18n="bookSlotTitle">రైతు నమోదు & మార్కెట్ స్లాట్ బుకింగ్</h2>
+        <p data-i18n="bookSlotSubtitle">మీరు మార్కెట్ యార్డుకు వచ్చే సమయాన్ని ముందుగా రిజర్వ్ చేసుకోండి. వాహనాల రద్దీని నివారించి తక్షణ QR టోకెన్ పాస్ పొందండి.</p>
+      </div>
+
+      <div class="form-card">
+        <form id="slotBookingForm">
+          <div class="form-grid two-cols">
+            <div class="form-group">
+              <label for="bookFarmerName" data-i18n="fieldName">రైతు పూర్తి పేరు</label>
+              <input type="text" id="bookFarmerName" class="form-control" placeholder="ఉదా: వెంకట్ రెడ్డి" required />
+            </div>
+            <div class="form-group">
+              <label for="bookMobile" data-i18n="fieldMobile">మొబైల్ నంబర్ (SMS హెచ్చరికల కోసం)</label>
+              <input type="tel" id="bookMobile" class="form-control" placeholder="9848022341" pattern="[0-9]{10}" required />
+            </div>
+          </div>
+
+          <div class="form-grid three-cols" style="margin-top:16px;">
+            <div class="form-group">
+              <label for="bookAadhaar" data-i18n="fieldAadhaar">కిసాన్ ఐడీ / ఆధార్ చివరి 4 అంకెలు</label>
+              <input type="text" id="bookAadhaar" class="form-control" placeholder="4109" maxlength="12" required />
+            </div>
+            <div class="form-group">
+              <label for="bookState" data-i18n="fieldState">రాష్ట్రాన్ని ఎంచుకోండి (భారతదేశ రాష్ట్రాలన్నీ)</label>
+              <select id="bookState" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+              <label for="bookDistrict" data-i18n="fieldDistrict">జిల్లాను ఎంచుకోండి</label>
+              <select id="bookDistrict" class="form-control" required></select>
+            </div>
+          </div>
+
+          <div class="form-grid two-cols" style="margin-top:16px;">
+            <div class="form-group">
+              <label for="bookMandal" data-i18n="fieldMandal">మండలం / గ్రామం</label>
+              <input type="text" id="bookMandal" class="form-control" placeholder="ఉదా: తెనాలి రూరల్" />
+            </div>
+            <div class="form-group">
+              <label for="bookMarket" data-i18n="fieldMarket">ప్రభుత్వ మార్కెట్ యార్డు / కొనుగోలు కేంద్రం</label>
+              <select id="bookMarket" class="form-control" required></select>
+            </div>
+          </div>
+
+          <div class="form-grid three-cols" style="margin-top:16px;">
+            <div class="form-group">
+              <label for="bookCrop" data-i18n="fieldCrop">విక్రయించదలచిన పంట</label>
+              <select id="bookCrop" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+              <label for="bookQuantity" data-i18n="fieldQuantity">అంచనా పరిమాణం (క్వింటాళ్ళలో)</label>
+              <input type="number" id="bookQuantity" class="form-control" placeholder="45" min="1" max="1000" required />
+            </div>
+            <div class="form-group">
+              <label for="bookVehicle" data-i18n="fieldVehicle">రవాణా వాహన రకం</label>
+              <select id="bookVehicle" class="form-control" required></select>
+            </div>
+          </div>
+
+          <div class="form-grid three-cols" style="margin-top:16px;">
+            <div class="form-group">
+              <label for="bookVehicleNo" data-i18n="fieldVehicleNo">వాహన నంబరు (ఉదా: AP 07 AB 1234)</label>
+              <input type="text" id="bookVehicleNo" class="form-control" placeholder="AP 07 TJ 4821" />
+            </div>
+            <div class="form-group">
+              <label for="bookDate" data-i18n="fieldDate">రావాలనుకుంటున్న తేదీ</label>
+              <input type="date" id="bookDate" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="bookTimeSlot" data-i18n="fieldTimeSlot">రావాలనుకుంటున్న సమయం (స్లాట్)</label>
+              <select id="bookTimeSlot" class="form-control" required>
+                <option value="06:30 AM - 08:00 AM">06:30 AM - 08:00 AM (Early Slot)</option>
+                <option value="08:00 AM - 09:30 AM" selected>08:00 AM - 09:30 AM (Morning Slot)</option>
+                <option value="09:30 AM - 11:00 AM">09:30 AM - 11:00 AM (Mid-Morning)</option>
+                <option value="11:00 AM - 12:30 PM">11:00 AM - 12:30 PM (Noon Slot)</option>
+                <option value="01:30 PM - 03:00 PM">01:30 PM - 03:00 PM (Afternoon)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:24px;">
+            <button type="submit" class="btn btn-primary btn-block">
+              <span style="font-size:1.2rem;">🎫</span>
+              <span data-i18n="btnGenerateToken">స్లాట్ బుక్ చేయండి & QR టోకెన్ పొందండి</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         TAB 3: LIVE QUEUE & CONGESTION MONITOR
+         ========================================================================= -->
+    <section id="tab-queue" class="tab-section">
+      <div class="section-header-box">
+        <h2 data-i18n="queueTitle">రియల్-టైమ్ కొనుగోలు క్యూ & రద్దీ పర్యవేక్షణ</h2>
+        <p data-i18n="queueSubtitle">ప్రభుత్వ మార్కెట్ యార్డులలో లైవ్ టోకెన్ స్థితి, బే కేటాయింపులు మరియు వాహనాల రద్దీ సమాచారం.</p>
+      </div>
+
+      <div class="queue-live-hero">
+        <div class="serving-token-display">
+          <span class="badge-live">● LIVE CALLING TOKEN</span>
+          <div class="token-huge" id="nowServingTokenDisplay">AP-GNT-2026-0839</div>
+          <p style="font-size:0.85rem; color:#e2e8f0; margin-top:6px;">Report to Gate 2 Weighbridge Bay A</p>
+          <button class="btn btn-primary btn-sm" id="btnSimulateAdvance" style="margin-top:14px;">
+            ⚡ <span data-i18n="btnSimulateAdvance">తదుపరి టోకెన్ పిలవండి (లైవ్ డెమో)</span>
+          </button>
+        </div>
+
+        <div class="bays-grid">
+          <div class="bay-item">
+            <div class="bay-name">Weighbridge 1</div>
+            <div class="bay-status">Processing AP-GNT-0839</div>
+            <span style="font-size:0.75rem; color:#a7f3d0;">Gross Weight: 45.2 Qtl</span>
+          </div>
+          <div class="bay-item">
+            <div class="bay-name">Weighbridge 2</div>
+            <div class="bay-status">Calling AP-GNT-0840</div>
+            <span style="font-size:0.75rem; color:#a7f3d0;">Paddy Consignment</span>
+          </div>
+          <div class="bay-item">
+            <div class="bay-name">Quality QA Bay</div>
+            <div class="bay-status">Moisture: 11.2% (Pass)</div>
+            <span style="font-size:0.75rem; color:#a7f3d0;">Grade A Certified</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Queue Table -->
+      <h3 style="font-size:1.15rem; margin-bottom:12px;">Active Vehicle Tokens in Mandi Line</h3>
+      <div class="table-responsive-wrap">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Token No</th>
+              <th>Farmer Name</th>
+              <th>Crop</th>
+              <th>Quantity</th>
+              <th>Est. Wait</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="liveQueueTableBody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         TAB 4: MARKETS & BEST PROFIT CALCULATOR
+         ========================================================================= -->
+    <section id="tab-markets" class="tab-section">
+      <div class="section-header-box">
+        <h2 data-i18n="marketDirTitle">భారతదేశంలోని అన్ని రాష్ట్రాలు, జిల్లా మార్కెట్ యార్డులు</h2>
+        <p data-i18n="marketDirSubtitle">ఏ రాష్ట్రాన్ని మరియు జిల్లానైనా ఎంచుకోండి. అందులోని అన్ని ప్రభుత్వ మార్కెట్ సెంటర్లు, ఖచ్చితమైన స్థానాలు, గూగుల్ మ్యాప్స్ మరియు లైవ్ పంట డిమాండ్ ఇక్కడే కనిపిస్తాయి.</p>
+      </div>
+
+      <!-- =====================================================================
+           FEATURE 1: BEST PLACES TO SELL & PREFERRED BUYING HUBS
+           ===================================================================== -->
+      <div class="best-destinations-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div>
+            <h3 style="font-size:1.25rem; color:#064e3b; display:flex; align-items:center; gap:8px;">
+              <span data-i18n="bestSellingDestinationsHeading">🌟 పంట అమ్మడానికి అత్యుత్తమ మార్కెట్లు & కొనుగోలు ప్రాధాన్య కేంద్రాలు</span>
+            </h3>
+            <p style="font-size:0.86rem; color:#475569; margin-top:4px;" data-i18n="bestSellingDestinationsSubtitle">
+              ఏ మార్కెట్లో అమ్మితే అత్యధిక ధర లభిస్తుంది? ఏ ప్రాంతాల్లోని కొనుగోలుదారులు (ఎగుమతిదారులు, మిల్లులు, CCI, FCI) ఎక్కువగా కొంటారు?
+            </p>
+          </div>
+        </div>
+
+        <!-- Crop Selector Pills -->
+        <div class="crop-chips-scroll" id="bestCropFilterPills">
+          <button type="button" class="crop-pill-btn active" data-crop="chilli">🌶️ Chilli / మిరప</button>
+          <button type="button" class="crop-pill-btn" data-crop="cotton">☁️ Cotton / పత్తి</button>
+          <button type="button" class="crop-pill-btn" data-crop="paddy">🌾 Paddy / వరి</button>
+          <button type="button" class="crop-pill-btn" data-crop="turmeric">🟡 Turmeric / పసుపు</button>
+          <button type="button" class="crop-pill-btn" data-crop="onion">🧅 Onion / ఉల్లి</button>
+          <button type="button" class="crop-pill-btn" data-crop="tomato">🍅 Tomato / టమోటా</button>
+          <button type="button" class="crop-pill-btn" data-crop="soybean">🌱 Soybean / సోయా</button>
+          <button type="button" class="crop-pill-btn" data-crop="maize">🌽 Maize / మొక్కజొన్న</button>
+          <button type="button" class="crop-pill-btn" data-crop="wheat">🌾 Wheat / గోధుమ</button>
+        </div>
+
+        <!-- Dynamic Destination & Preferred Buying Hubs Container -->
+        <div id="bestDestinationsView">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           FEATURE 2: CORE FORMULA & NET PROFIT CALCULATOR
+           ===================================================================== -->
+      <div class="form-card">
+        <!-- Core Formula Callout Banner -->
+        <div class="formula-banner">
+          <span class="formula-badge">📐 FORMULA</span>
+          <span class="formula-text">
+            <strong>Best Selling = Mandi Price − Transportation Cost − Other Charges</strong>
+          </span>
+        </div>
+
+        <h3 style="font-size:1.15rem; color:#047857; margin-bottom:4px;" data-i18n="calcTitle">
+          ఉత్తమ మార్కెట్ సిఫార్సు & నికర లాభ కాలిక్యులేటర్
+        </h3>
+        <p style="font-size:0.85rem; color:#64748b; margin-bottom:16px;" data-i18n="calcSubtitle">
+          సూత్రం: నికర అమ్మకం లాభం = పంట ధర - రవాణా ఖర్చు - ఇతర మార్కెట్ ఛార్జీలు
+        </p>
+
+        <div class="form-grid three-cols">
+          <div class="form-group">
+            <label for="calcState" data-i18n="fieldState">రాష్ట్రాన్ని ఎంచుకోండి (భారతదేశ రాష్ట్రాలన్నీ)</label>
+            <select id="calcState" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label for="calcDistrict" data-i18n="fieldDistrict">జిల్లాను ఎంచుకోండి</label>
+            <select id="calcDistrict" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label for="calcCrop" data-i18n="selectCropToCompare">పోల్చాల్సిన పంటను ఎంచుకోండి</label>
+            <select id="calcCrop" class="form-control"></select>
+          </div>
+        </div>
+
+        <div class="form-grid two-cols" style="margin-top:14px;">
+          <div class="form-group">
+            <label for="calcQuantity" data-i18n="enterCropQty">అమ్మాల్సిన పంట పరిమాణం (క్వింటాళ్ళు)</label>
+            <input type="number" id="calcQuantity" class="form-control" value="35" min="1" max="1000" />
+          </div>
+          <div class="form-group">
+            <label for="calcVehicle" data-i18n="selectTransVehicle">రవాణా వాహనాన్ని ఎంచుకోండి</label>
+            <select id="calcVehicle" class="form-control"></select>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <button type="button" id="btnRunCalculator" class="btn btn-primary">
+            🔍 Compare & Calculate Best Mandi
+          </button>
+        </div>
+      </div>
+
+      <!-- Best Profit Ranked Cards -->
+      <h3 style="font-size:1.2rem; margin: 24px 0 10px;">
+        🏆 Best Selling Recommendations (Ranked by Maximum In-Hand Profit)
+      </h3>
+      <div id="profitResultsList" class="profit-results-container">
+        <!-- Ranked results injected here -->
+      </div>
+
+      <!-- District Government Markets Directory Listing -->
+      <h3 style="font-size:1.2rem; margin: 34px 0 10px;">
+        🏛️ All Government APMC Mandis & Procurement Centres in Selected District
+      </h3>
+      <div id="districtMarketsList" class="markets-grid">
+        <!-- Market yard cards injected here -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         TAB 5: PROCUREMENT & DBT PAYMENT TRACKER
+         ========================================================================= -->
+    <section id="tab-track" class="tab-section">
+      <div class="section-header-box">
+        <h2 data-i18n="trackTitle">పంట కొనుగోలు & బ్యాంకు DBT పేమెంట్ ట్రాకర్</h2>
+        <p data-i18n="trackSubtitle">తేమ శాతం, ఎలక్ట్రానిక్ కాటా బరువు, MSP కొనుగోలు రశీదు మరియు బ్యాంకు ఖాతాకు జమ అయ్యే సమాచారం.</p>
+      </div>
+
+      <div class="form-card">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <input type="text" id="trackTokenInput" class="form-control" style="flex:1; min-width:260px;" data-i18n-ph="searchTokenPlaceholder" placeholder="Enter Token Number (e.g. AP-GNT-2026-0842) or Mobile No" />
+          <button type="button" id="btnSearchToken" class="btn btn-primary">
+            🔍 <span data-i18n="btnTrack">లైవ్ స్టేటస్ చూడండి</span>
+          </button>
+        </div>
+        <p style="font-size:0.78rem; color:#64748b; margin-top:8px;">
+          Quick test samples: <code>AP-GNT-2026-0842</code> (Venkat Reddy) or <code>TG-WGL-2026-0195</code> (Ramesh Rao)
+        </p>
+      </div>
+
+      <div id="trackResultBox" style="display:none; margin-top:20px;">
+        <!-- Tracking result card injected here -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         TAB 6: AI KISAAN VOICE ASSISTANT & Q&A (రైతు వాయిస్)
+         ========================================================================= -->
+    <section id="tab-voice" class="tab-section">
+      <div class="section-header-box">
+        <h2 data-i18n="voiceTitle">రైతు వాయిస్ అసిస్టెంట్ & ప్రశ్న సమాధానాలు (AI Kisaan Vaani)</h2>
+        <p data-i18n="voiceSubtitle">మీ నోటితోనే అడగండి. మైక్ తాకి పంట ధరలు, ఎక్కడ అమ్మితే లాభం, ఎవరు కొంటారు, లేదా నికర లాభ సూత్రం గురించి అడగండి.</p>
+      </div>
+
+      <!-- Voice Record Receiver Hero Card -->
+      <div class="record-receiver-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div class="record-badge">
+            <span data-i18n="voiceRecordReceiverBadge">🎙️ లైవ్ వాయిస్ రికార్డ్ రిసీవర్</span>
+            <span id="voiceRecordTimerWrap" style="display:none;" class="record-timer-badge">
+              ● REC <span id="voiceRecordTimer">00:00</span>
+            </span>
+          </div>
+          <span style="font-size:0.8rem; color:#d1fae5;">✓ WebSpeech & Multilingual AI Receiver</span>
+        </div>
+
+        <div class="voice-mic-container" style="margin-top:10px;">
+          <button type="button" id="voiceMicBtn" class="btn-mic-record" aria-label="Microphone" title="Click to speak / record">
+            🎤
+          </button>
+          <div id="voiceStatusText" class="voice-status-text" data-i18n="voiceIdle">
+            మాట్లాడటానికి / రికార్డ్ చేయడానికి మైక్ తాకండి
+          </div>
+
+          <div id="voiceWaveform" class="voice-waveform" style="display:none;">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+
+        <!-- Voice Live Transcript & Input Editor -->
+        <div class="voice-input-editor">
+          <input type="text" id="voiceTranscriptInput" placeholder="మీరు మాట్లాడే మాటలు ఇక్కడ కనిపిస్తాయి (లేదా నేరుగా టైప్ చేయండి)..." />
+          <button type="button" id="btnSubmitVoiceQuery" class="btn-ask-query">
+            🚀 <span data-i18n="btnSendVoiceQuery">ప్రశ్న అడగండి</span>
+          </button>
+          <button type="button" id="btnClearVoiceInput" class="btn-clear-query" title="Clear input">
+            🗑️ <span data-i18n="btnClearVoice">తుడిపివేయండి</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Voice Response Output Card -->
+      <div id="voiceResponseBox" class="voice-response-card" style="display:none;">
+        <div class="voice-response-header">
+          <span class="voice-resp-badge" data-i18n="voiceResponseLabel">రైతు వాణి సమాధానం</span>
+          <button type="button" id="voiceReadAloudBtn" class="btn btn-outline btn-sm">
+            🔊 <span data-i18n="btnReadAloud">సమాధానం గట్టిగా చదవండి (వాయిస్)</span>
+          </button>
+        </div>
+        <div id="voiceAnswerContent" class="voice-answer-text"></div>
+      </div>
+
+      <!-- Quick Suggested Voice Queries -->
+      <div class="sample-queries-box">
+        <h4 data-i18n="sampleQuestionsTitle">తరచుగా అడిగే ప్రశ్నలు (నొక్కి చూడండి)</h4>
+        <div class="chips-wrap">
+          <button type="button" class="sample-voice-chip" data-query="మిర్చి ఎక్కడ అమ్మితే ఎక్కువ లాభం? ఏ ప్రాంతం కొనుగోలుకు మంచిది?">
+            🌶️ మిర్చి ఎక్కడ అమ్మితే ఎక్కువ లాభం?
+          </button>
+          <button type="button" class="sample-voice-chip" data-query="పత్తిని ఎవరు ఎక్కువగా కొంటారు? కొనుగోలు కేంద్రాలు ఎక్కడ ఉన్నాయి?">
+            ☁️ పత్తిని ఎవరు ఎక్కువగా కొంటారు?
+          </button>
+          <button type="button" class="sample-voice-chip" data-query="వరి అమ్మకానికి ఉత్తమ మార్కెట్ ఏది? మిర్యాలగూడ ధర ఎంత?">
+            🌾 వరి అమ్మడానికి ఉత్తమ మార్కెట్ ఏది?
+          </button>
+          <button type="button" class="sample-voice-chip" data-query="నికర అమ్మకం సూత్రం (ధర - రవాణా - ఛార్జీలు) ఎలా లెక్కిస్తారు?">
+            💰 నికర అమ్మకం సూత్రం ఏమిటి?
+          </button>
+          <button type="button" class="sample-voice-chip" data-query="నిజామాబాద్ పసుపు రేటు ఎంత? ఎవరు కొంటారు?">
+            🟡 నిజామాబాద్ పసుపు రేటు ఎంత?
+          </button>
+          <button type="button" class="sample-voice-chip" data-query="లసల్‌గావ్ ఉల్లిపాయల ధర ఎంత?">
+            🧅 లసల్‌గావ్ ఉల్లి ధర ఎంత?
+          </button>
+          <button type="button" class="sample-voice-chip" data-query="నా టోకెన్ స్టేటస్ ఏమిటి?">
+            🎫 నా టోకెన్ స్టేటస్ ఏమిటి?
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Q&A Conversation Thread -->
+      <div class="qa-history-box">
+        <h4 style="font-size:0.98rem; color:#0f172a; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <span>💬</span>
+          <span data-i18n="qaHistoryTitle">వాయిస్ ప్రశ్నలు & సమాధానాల సంభాషణ</span>
+        </h4>
+        <div id="voiceQAHistoryList">
+          <div style="text-align:center; color:#94a3b8; font-size:0.85rem; padding:16px;">
+            మీరు అడిగే ప్రశ్నలు మరియు సమాధానాలు ఇక్కడ కనిపిస్తాయి
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FLOATING VOICE ASSISTANT FAB
+       ========================================================================= -->
+  <button class="floating-voice-fab" onclick="app.switchTab('voice')" aria-label="Open Voice Assistant">
+    🎙️
+  </button>
+
+  <!-- =========================================================================
+       MOBILE-FIRST BOTTOM NAVIGATION BAR (WITH DEDICATED VOICE TAB OPTION)
+       ========================================================================= -->
+  <nav class="mobile-bottom-nav">
+    <button class="nav-item-btn active" data-nav-tab="home">
+      <span class="nav-icon">🏠</span>
+      <span data-i18n="navHome">హోమ్</span>
+    </button>
+    <button class="nav-item-btn" data-nav-tab="book">
+      <span class="nav-icon">📅</span>
+      <span data-i18n="navBookSlot">స్లాట్ బుకింగ్</span>
+    </button>
+    <button class="nav-item-btn" data-nav-tab="queue">
+      <span class="nav-icon">🚦</span>
+      <span data-i18n="navQueue">లైవ్ క్యూ</span>
+    </button>
+    <button class="nav-item-btn" data-nav-tab="markets">
+      <span class="nav-icon">📊</span>
+      <span data-i18n="navMarkets">మార్కెట్లు & లాభం</span>
+    </button>
+    <button class="nav-item-btn" data-nav-tab="voice">
+      <span class="nav-icon">🎙️</span>
+      <span data-i18n="navVoice">వాయిస్ AI</span>
+    </button>
+    <button class="nav-item-btn" data-nav-tab="track">
+      <span class="nav-icon">🔎</span>
+      <span data-i18n="navTrack">స్టేటస్</span>
+    </button>
+  </nav>
+
+  <!-- =========================================================================
+       BIOMETRIC AUTHENTICATION MODAL
+       ========================================================================= -->
+  <div id="biometricModal" class="app-modal">
+    <div class="modal-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:1.15rem;" data-i18n="biometricPromptTitle">రైతు బయోమెట్రిక్ ప్రామాణీకరణ</h3>
+        <button type="button" id="biometricModalClose" style="background:none; border:none; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <p style="font-size:0.84rem; color:#64748b; margin-top:4px;" data-i18n="biometricPromptDesc">
+        మీ వేలిముద్ర సెన్సార్‌ను తాకండి లేదా ఫేస్ వెరిఫై చేసి వెంటనే మీ స్లాట్ మరియు టోకెన్ వివరాలను పొందండి.
+      </p>
+
+      <div class="biometric-scanner-box">
+        <div id="biometricScanGraphic" class="scanner-circle">👆</div>
+        <div id="biometricScanStatus" style="font-size:0.9rem; font-weight:600; color:#0f172a;">
+          Scanning sensor...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SECURITY PASSWORD LOGIN MODAL (ALTERNATIVE LOGIN)
+       ========================================================================= -->
+  <div id="passwordLoginModal" class="app-modal">
+    <div class="modal-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:1.15rem;" data-i18n="securityPasswordTitle">రైతు సెక్యూరిటీ పాస్‌వర్డ్ / పిన్</h3>
+        <button type="button" id="closePasswordLoginModal" style="background:none; border:none; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <p style="font-size:0.84rem; color:#64748b; margin-top:4px;" data-i18n="securityPasswordDesc">
+        బయోమెట్రిక్ లేనప్పుడు మీ వ్యక్తిగత సెక్యూరిటీ పాస్‌వర్డ్ ద్వారా ఖాతాలోకి ప్రవేశించండి.
+      </p>
+
+      <div style="margin-top:16px;">
+        <label style="font-size:0.85rem; font-weight:600; color:#334155;" data-i18n="fieldPassword">
+          సెక్యూరిటీ పాస్‌వర్డ్ / పిన్ నమోదు చేయండి
+        </label>
+        <input type="password" id="enteredSecurityPin" class="form-control" placeholder="Default PIN: 4109" maxlength="10" style="margin-top:6px; letter-spacing:4px; font-size:1.2rem; text-align:center;" />
+      </div>
+
+      <div style="margin-top:20px; display:flex; gap:10px;">
+        <button type="button" id="btnSubmitPasswordLogin" class="btn btn-primary btn-block">
+          🔓 <span data-i18n="btnLoginWithPassword">పాస్‌వర్డ్‌తో లాగిన్ అవ్వండి</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FIX / SET SECURITY PASSWORD MODAL
+       ========================================================================= -->
+  <div id="fixPasswordModal" class="app-modal">
+    <div class="modal-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:1.15rem;" data-i18n="fixPasswordTitle">మీ సెక్యూరిటీ పాస్‌వర్డ్‌ను సెట్ చేయండి</h3>
+        <button type="button" id="closeFixPasswordModal" style="background:none; border:none; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <p style="font-size:0.84rem; color:#64748b; margin-top:4px;" data-i18n="fixPasswordDesc">
+        మీ ఖాతా భద్రత కోసం మీరు మాత్రమే ఉపయోగించే రహస్య పాస్‌వర్డ్ / పిన్‌ను నిర్ణయించండి (కనీసం 4 అక్షరాలు/అంకెలు).
+      </p>
+
+      <div style="margin-top:14px;">
+        <label style="font-size:0.85rem; font-weight:600; color:#334155;" data-i18n="fieldNewPassword">
+          కొత్త సెక్యూరిటీ పాస్‌వర్డ్ / పిన్
+        </label>
+        <input type="password" id="newSecurityPin" class="form-control" placeholder="Ex: 8842" maxlength="10" style="margin-top:6px;" />
+      </div>
+
+      <div style="margin-top:12px;">
+        <label style="font-size:0.85rem; font-weight:600; color:#334155;" data-i18n="fieldConfirmPassword">
+          పాస్‌వర్డ్ మరలా నమోదు చేయండి
+        </label>
+        <input type="password" id="confirmSecurityPin" class="form-control" placeholder="Re-enter to confirm" maxlength="10" style="margin-top:6px;" />
+      </div>
+
+      <div id="currentPasswordDisplay" style="font-size:0.78rem; color:#047857; margin-top:10px; font-weight:600;">
+        Active PIN: •••• (Default: 4109)
+      </div>
+
+      <div style="margin-top:20px;">
+        <button type="button" id="btnSaveFixedPassword" class="btn btn-primary btn-block">
+          💾 <span data-i18n="btnSavePassword">పాస్‌వర్డ్ భద్రపరచండి</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MICROPHONE PERMISSION GUIDANCE MODAL
+       ========================================================================= -->
+  <div id="micPermissionModal" class="app-modal">
+    <div class="modal-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:1.15rem; color:#dc2626; display:flex; align-items:center; gap:8px;">
+          <span>🎙️</span>
+          <span data-i18n="micPermTitle">మైక్రోఫోన్ అనుమతి అవసరం (Microphone Permission Required)</span>
+        </h3>
+        <button type="button" id="closeMicPermissionModal" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+      </div>
+
+      <p style="font-size:0.9rem; color:#334155; margin-top:10px; line-height:1.5;" data-i18n="micPermDesc">
+        FarmDirect రైతు వాయిస్ అసిస్టెంట్‌తో మీ సొంత భాషలో మాట్లాడటానికి మీ బ్రౌజర్ మైక్రోఫోన్ అనుమతి అవసరం.
+      </p>
+
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; margin-top:14px; font-size:0.86rem; color:#475569;">
+        <strong style="color:#0f172a;" data-i18n="micPermStepsHeader">మైక్రోఫోన్ ఎలా ప్రారంభించాలి (How to Enable):</strong>
+        <ol style="margin-left:20px; margin-top:8px; line-height:1.7;">
+          <li>మీ బ్రౌజర్ ఎగువన ఉన్న అడ్రస్ బార్‌లో 🔒 లేదా 🎙️ ఐకాన్‌పై క్లిక్ చేయండి.</li>
+          <li><strong>Microphone (మైక్రోఫోన్)</strong> ఎదురుగా ఉన్న బటన్‌ను <strong>Allow (అనుమతించు)</strong> గా మార్చండి.</li>
+          <li>క్రింది 'మళ్ళీ మాట్లాడండి' బటన్ నొక్కి వెంటనే మాట్లాడటం ప్రారంభించండి!</li>
+        </ol>
+      </div>
+
+      <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:8px; padding:10px 14px; margin-top:12px; font-size:0.82rem; color:#047857;">
+        💡 <strong>సలహా:</strong> మైక్ పనిచేయకపోతే మీరు క్రింది టెక్స్ట్ బాక్స్‌లో నేరుగా మీ ప్రశ్నను టైప్ కూడా చేయవచ్చు.
+      </div>
+
+      <div style="margin-top:20px; display:flex; gap:10px;">
+        <button type="button" id="btnRetryMicPermission" class="btn btn-primary btn-block">
+          🔄 <span data-i18n="btnRetryMic">అనుమతించిన తర్వాత మళ్ళీ ప్రయత్నించండి</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DIGITAL QR TOKEN PASS MODAL
+       ========================================================================= -->
+  <div id="tokenSlipModal" class="app-modal">
+    <div class="modal-sheet" id="tokenSlipContent"></div>
+  </div>
+
+  <!-- App Toast Notification -->
+  <div id="appToast" class="app-toast"></div>
+
+  <!-- JavaScript Entry Module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

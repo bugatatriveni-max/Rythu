@@ -1,0 +1,15 @@
+.git
+.gitignore
+.env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+cloudflared.exe
+.gemini
+scratch
+PYTHON.py
+qy_beautified.js
+qy_decompiled.js
+voice_section.js
